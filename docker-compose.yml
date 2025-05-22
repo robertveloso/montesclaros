@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  orchestrator:
+    build: ./orchestrator
+    environment:
+      - DATABASE_URL=postgresql://user:pass@main-db:5432/main
+    depends_on:
+      - main-db
+
+  superkilo-worker:
+    build: ./harvester
+    environment:
+      - WORKER_TYPE=superkilo
+      - DATABASE_URL=postgresql://user:pass@superkilo-db:5432/superkilo_worker
+    depends_on:
+      - superkilo-db
+
+  carrefour-worker:
+    build: ./harvester
+    environment:
+      - WORKER_TYPE=carrefour
+      - DATABASE_URL=postgresql://user:pass@carrefour-db:5432/carrefour_worker
+    depends_on:
+      - carrefour-db
+
+  main-db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=main
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+
+  superkilo-db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=superkilo_worker
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+
+  carrefour-db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=carrefour_worker
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass

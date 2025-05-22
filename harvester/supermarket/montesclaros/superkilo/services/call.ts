@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { decryptBody, opensslDecrypt } from './decrypt';
+import { decryptBody } from './decrypt';
 
 // const decryptedResponse = opensslDecrypt(response.data.encrypted, ENCRYPTION_KEY); This decrypt the payload
 

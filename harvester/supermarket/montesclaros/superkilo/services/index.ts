@@ -12,10 +12,10 @@ const client = new ApiClient({
     authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4Y2I5MDJlNy04MTkzLTQzN2UtYjMyMi05NWM3ZDYwZDRkODAiLCJhdWQiOiJzaXRlQW5vbmltbyIsImlhdCI6MTc0NzkyMTkxOCwiZXhwIjoxNzQ3OTI1NTE4fQ.8kdY6JK-svgR86kdqI7X7ZSTeNA3A80uta-bD8cSEmA',
 });
 
-class Scraper {
+export class Scraper {
     private client: ApiClient;
 
-    constructor(client: ApiClient) {
+    constructor() {
         this.client = client;
     }
 
@@ -29,9 +29,6 @@ class Scraper {
         const encryptedPayload = "U2FsdGVkX19//lL1IXbgf3PggeJO6AS0lp1aSt+gCQhKXiL5wc3DKXv+y26bOkWYfzSo288euXXCKeXHoOTG0I9krzJ4gG4aBMW73zV3cU9md3mMTkwcA81Fn5sjp+Yqf5LYTRN+H9Tq7ievFnFhbJyqfXITg7ZHnkek9e7SgW9ALIT0z9yaKgc+J5vA8TJcqpbcDRu5WREHviZDL7yPhtdA57xqqLGMbaA76s6MCR8=";
         const result = await client.getProductList(encryptedPayload);
         console.log(result);
+        return result
     }
 }
-
-Scraper.login().then(() => {
-    Scraper.getProductList();
-});
